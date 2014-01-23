@@ -4,6 +4,11 @@
 domain=$1
 path=$2
 
+# Add ending / to path if missing
+if [[ ! $path =~ /$ ]]; then
+    path=$path/
+fi
+
 # Check domain/path availability
 sudo yunohost app checkurl $domain$path -a radicale
 sudo yunohost app setting radicale skipped_uris -v "$path"
